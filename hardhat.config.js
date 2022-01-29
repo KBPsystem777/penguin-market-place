@@ -1,7 +1,9 @@
 require("@nomiclabs/hardhat-waffle")
+require("dotenv").config()
 const fs = require("fs")
-const privateKey = fs.readFileSync(".secret").toString()
-const projectId = "9a81821557584253bc1f28ed3aa24634" || process.env.infuraId
+const privateKey =
+  process.env.privateKey || fs.readFileSync(".secret").toString()
+const projectId = process.env.infuraId
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -16,6 +18,7 @@ const projectId = "9a81821557584253bc1f28ed3aa24634" || process.env.infuraId
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
+console.log(process.env.privateKey)
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
@@ -33,9 +36,7 @@ module.exports = {
       accounts: [privateKey],
     },
     ropsten: {
-      url:
-        `https://ropsten.infura.io/v3/9a81821557584253bc1f28ed3aa24634` ||
-        process.env.infuraUrl,
+      url: process.env.infuraUrl,
       accounts: [privateKey],
     },
   },
